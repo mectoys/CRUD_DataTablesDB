@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{% block title %} {% endblock %}</title>
+
+        <!---Agrega un favicon , es agregar una pequeña imagen localizada en el tab de un navegador --->
+     <link  rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/npm/twemoji@11.3.0/2/svg/1f47d.svg" />
+
+    <!-- Enlace a Bootstrap 5.0.2 CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css">
+
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+        <!-- DataTables CSS para button-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+
+     <!-- DataTables ejemplo 7-->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/searchbuilder/1.6.0/css/searchBuilder.dataTables.min.css">
+ <!-- DataTables ejemplo 7-->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.5.1/css/dataTables.dateTime.min.css">
+
+
+    <!-- DataTables JavaScript -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+
+      <!-- DataTables JavaScript rowgroup -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/rowgroup/1.4.1/js/dataTables.rowGroup.min.js"></script>
+
+         <!---DataTables JavaScript  button Ejemplo 5 -->
+    <script type="text/javascript" charset="utf8" src=https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js></script>
+        <!---DataTables JavaScript Print button Ejemplo 5 -->
+    <script type="text/javascript" charset="utf8" src=https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js></script>
+
+    <!---DataTables JavaScript Boton colVis, opcion para columnas visible a travez de un button Ejemplo 5 -->
+    <script type="text/javascript" charset="utf8" src=https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js></script>
+
+
+     <!---DataTables : libreria JavaScript permite crear, leer y editar archivos zip Ejemplo 6 -->
+  <script type="text/javascript" charset="utf8" src=https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js></script>
+
+<!---DataTables : libreria JavaScript permite crer archivos PDF Ejemplo 6 -->
+  <script type="text/javascript" charset="utf8" src=https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js></script>
+
+    <!---DataTables : libreria JavaScript para tipo de letras  exportacion de PDF Ejemplo 6 -->
+  <script type="text/javascript" charset="utf8" src=https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js></script>
+
+    <!---DataTables : libreria JavaScript para boton HTML5 de exportación Ejemplo 6 -->
+  <script type="text/javascript" charset="utf8" src=https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js></script>
+
+        <!---DataTables : libreria JavaScript para boton Construcción de COnsulta Ejemplo 7 -->
+  <script type="text/javascript" charset="utf8" src=https://cdn.datatables.net/searchbuilder/1.6.0/js/dataTables.searchBuilder.min.js></script>
+    <!---DataTables : libreria JavaScript para control de fecha de COnsulta Ejemplo 7 -->
+  <script type="text/javascript" charset="utf8" src=https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js></script>
+
+
+</head>
+
+<body>
+
+<header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Mantenimiento</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+         <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ url_for('datatable_bp.getBanks') }}">Mantenimiento Bancos</a>
+         </li>
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+</header>
+
+<div class="container py-3">
+    {% block body %}
+
+    {% endblock %}
+</div>
+
+<!-- Bootstrap 5.0.2 incluye la biblioteca Popper, por lo que no necesitas cargarla por separado. -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>
