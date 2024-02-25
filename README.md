@@ -1,3 +1,7 @@
+![Video6_DataTableJS_prjFinal](https://github.com/mectoys/CRUD_DataTablesDB/assets/7143758/85a44d66-ab42-4f8f-aea2-a259765d7cd4)
+
+🚀 ¡Bienvenido al Episodio 6! En este tutorial, continuaremos nuestro viaje de desarrollo para construir un CRUD completo con Python, Flask, y SQL Server. En esta entrega, nos enfocaremos en la codificación de los módulos en Python, creando funciones para Insertar, Actualizar y Eliminar registros mediante las instrucciones INSERT, UPDATE y DELETE. I el uso de ventanas emergentes con el uso de la libreria SWEETALERT2.
+
 ![Video_DataTableJS_prjFinal](https://github.com/mectoys/CRUD_DataTablesDB/assets/7143758/6268c13a-1ad2-4d7c-959c-42dba80c45cb)
 
 👨‍💻 ¡Bienvenido a este emocionante tutorial donde te enseñaré a construir un CRUD completo con Python Flask, DataTables y SQL Server! En este video, 
