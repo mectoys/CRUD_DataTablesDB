@@ -41,10 +41,7 @@
                 {%  endfor %}
              </tbody>
              </thead>
-
-
          </table>
-
             </div>
      </div>
 <script>
@@ -52,11 +49,10 @@
      $(document).ready(function () {
        var table= $('#table_id').DataTable({
             ordering:false
-
         } );
-         txtStock
         var bank= $('#txtBank');
-
+        var databank;
+        var Idbco;
 
         $('#table_id tbody').on('click','tr',function(){
           if ($(this).hasClass('selected')){
@@ -65,36 +61,57 @@
           else{
              table.$('tr.selected').removeClass('selected');
              $(this).addClass('selected');
-             var data = table.row(this).data();
-             txtBank.val(data[0]);
-
+             databank = table.row(this).data();
+             bank.val(databank[1]);
+             Idbco=databank[0];
           }
         });
 
-
         $('#addRow').on('click',function (){
+            e.preventDefault();
             var newBank = bank.val()
-            ClearText();
+            //Verificar newBank tiene datos
+            if (newBank.length >0){
+                //llamar funcion CRUD
+                 ClearText();
+            }else {
+                console.error('La longitud de NewBank es cero o menor.');
+            }
         });
 
         $('#editRow').on('click',function (){
            var newBank = bank.val()
-            var selectedRow = table.row('.selected');
-
-            if(selectedRow.any()){
-                selectedRow.data([newBank]).draw();
-
-                ClearText();
+            if (newBank.length >0){
+                var selectedRow = table.row('.selected');
+                //CRUD(Idbco,newBank,'/update')
+            }else {
+                console.error('La longitud de NewBank es cero o menor.');
             }
+
+
         });
 
         $('#delRow').on('click',function (){
-            table.row('.selected').remove().draw();
-
+            var newBank = bank.val()
+             if (newBank.length >0){
+                Swal.fire({
+                    title: "Desea remover el registro actual?",
+                      showDenyButton: false,
+                      showCancelButton: true
+                }).then((result) => {
+                    if(result.isConfirmed){
+                      // CRUD(Idbco,"",'/delete');
+                       ClearText();
+                    }
+                });
+             }
+             else {
+                console.error('La longitud de NewBank es cero o menor.');
+             }
         });
+
         function ClearText(){
              bank.val("")
-
         }
     });
 </script>
