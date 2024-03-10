@@ -67,11 +67,12 @@
           }
         });
 
-        $('#addRow').on('click',function (){
+        $('#addRow').on('click',function (e){
             e.preventDefault();
             var newBank = bank.val()
             //Verificar newBank tiene datos
             if (newBank.length >0){
+                CRUD("", newBank, '/insert')
                 //llamar funcion CRUD
                  ClearText();
             }else {
@@ -83,11 +84,10 @@
            var newBank = bank.val()
             if (newBank.length >0){
                 var selectedRow = table.row('.selected');
-                //CRUD(Idbco,newBank,'/update')
+                CRUD(Idbco,newBank,'/update')
             }else {
                 console.error('La longitud de NewBank es cero o menor.');
             }
-
 
         });
 
@@ -100,7 +100,7 @@
                       showCancelButton: true
                 }).then((result) => {
                     if(result.isConfirmed){
-                      // CRUD(Idbco,"",'/delete');
+                       CRUD(Idbco,"",'/delete');
                        ClearText();
                     }
                 });
@@ -113,6 +113,42 @@
         function ClearText(){
              bank.val("")
         }
+
+        //JQUERY
+        //AJAX => jAVAsCRIPT Asincrono y XML
+        function CRUD (idbco, bank , url){
+            var formData ={
+                idbco: idbco,
+                bank:bank
+            };
+           //Realizar solicitud AJAX  usando JQuey
+           $.ajax({
+                //configurar solicitud POST
+                type:'POST',
+                //Especificar la URL
+                url: url,
+                contentType: 'application/json;charset=UTF-8',
+                //CONVERTIR obj a JSON
+                data: JSON.stringify(formData),
+
+                success: function (response) {
+                    //Ejecucion correcta
+                    Swal.fire({
+                              icon: "info",
+                              title: "Mantenimiento",
+                              text: "Operación Realizada!",
+                               willClose :  function () {
+                                    window.location.href = '/allBanks';
+                               }
+                            });
+            },
+            //Funcion ejecuta en caso de error
+            error: function (error){
+                console.error('Error',error);
+            }
+        });
+    };
+
     });
 </script>
 
