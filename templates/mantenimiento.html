@@ -44,6 +44,9 @@
          </table>
             </div>
      </div>
+
+<script src="{{url_for( 'static', filename='js/functionCRUD.js') }}">  </script>
+
 <script>
 
      $(document).ready(function () {
@@ -72,7 +75,25 @@
             var newBank = bank.val()
             //Verificar newBank tiene datos
             if (newBank.length >0){
-                CRUD("", newBank, '/insert')
+                CRUD_promesa("", newBank, '/insert').then(function (response){
+                    //Operaciones después del éxito
+                    Swal.fire({
+                        title: "Mantenimiento",
+                        text: "Operación Realizada",
+                        icon: "succes",
+                        willClose :  function () {
+                                        window.location.href = '/allBanks';
+                                   }
+                    });
+                })
+                .catch(function (error){
+                    //manejo de errores
+                    Swal.fire({
+                        icon: "error",
+                        title:"Mantenimiento",
+                        text: "Error al procesar el dato."
+                    });
+                });
                 //llamar funcion CRUD
                  ClearText();
             }else {
@@ -84,7 +105,27 @@
            var newBank = bank.val()
             if (newBank.length >0){
                 var selectedRow = table.row('.selected');
-                CRUD(Idbco,newBank,'/update')
+
+                CRUD_promesa(Idbco, newBank, '/update').then(function (response){
+                    //Operaciones después del éxito
+                    Swal.fire({
+                        title: "Mantenimiento",
+                        text: "Operación Realizada",
+                        icon: "succes",
+                        willClose :  function () {
+                                        window.location.href = '/allBanks';
+                                   }
+                    });
+                })
+                .catch(function (error){
+                    //manejo de errores
+                    Swal.fire({
+                        icon: "error",
+                        title:"Mantenimiento",
+                        text: "Error al procesar el dato."
+                    });
+                });
+
             }else {
                 console.error('La longitud de NewBank es cero o menor.');
             }
@@ -100,7 +141,24 @@
                       showCancelButton: true
                 }).then((result) => {
                     if(result.isConfirmed){
-                       CRUD(Idbco,"",'/delete');
+
+                        CRUD_promesa(Idbco, newBank, '/delete').then(function (response){
+                        //Operaciones después del éxito
+                        Swal.fire({
+                            title: "Mantenimiento",
+                            text: "Operación Realizada",
+                            icon: "succes",
+                            willClose :  function () { window.location.href = '/allBanks'; }
+                        });
+                    })
+                    .catch(function (error){
+                        //manejo de errores
+                        Swal.fire({
+                            icon: "error",
+                            title:"Mantenimiento",
+                            text: "Error al procesar el dato."
+                        });
+                    });
                        ClearText();
                     }
                 });
@@ -114,42 +172,39 @@
              bank.val("")
         }
 
-        //JQUERY
-        //AJAX => jAVAsCRIPT Asincrono y XML
-        function CRUD (idbco, bank , url){
-            var formData ={
+        function CRUD_promesa(idbco, bank, url) {
+            return new Promise(function (resolve, reject){
+               var formData = {
                 idbco: idbco,
                 bank:bank
             };
-           //Realizar solicitud AJAX  usando JQuey
+              //Realizar solicitud AJAX  usando JQuey
            $.ajax({
-                //configurar solicitud POST
-                type:'POST',
-                //Especificar la URL
-                url: url,
-                contentType: 'application/json;charset=UTF-8',
-                //CONVERTIR obj a JSON
-                data: JSON.stringify(formData),
+                    //configurar solicitud POST
+                    type:'POST',
+                    //Especificar la URL
+                    url: url,
+                    contentType: 'application/json;charset=UTF-8',
+                    //CONVERTIR obj a JSON
+                    data: JSON.stringify(formData),
 
-                success: function (response) {
-                    //Ejecucion correcta
-                    Swal.fire({
-                              icon: "info",
-                              title: "Mantenimiento",
-                              text: "Operación Realizada!",
-                               willClose :  function () {
-                                    window.location.href = '/allBanks';
-                               }
-                            });
-            },
-            //Funcion ejecuta en caso de error
-            error: function (error){
-                console.error('Error',error);
+                    success: function (response) {
+                       //resuelve la promesa con la respuesta
+                       resolve(response);
+                    },
+                    //Funcion ejecuta en caso de problema
+                    error: function (error){
+                        //rechaza la promesa con el error
+                        reject(error);
+                     },
+                    complete: function () {
+                        //Agregar codigo que desees ejecutar despues de la solicitud
+                    }
+                });
+              });
             }
-        });
-    };
-
     });
+
 </script>
 
 {% endblock %}
